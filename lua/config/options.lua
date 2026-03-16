@@ -16,7 +16,7 @@ opt.updatetime = 250
 
 --GUI COLORS--
 opt.termguicolors = true
---vim.cmd("syntax on")
+vim.g.have_nerd_font = true
 --GUI COLORS--
 
 --INDENTING--
@@ -26,12 +26,19 @@ opt.shiftwidth = 2
 opt.autoindent = true
 opt.expandtab = true
 opt.smartindent = true
+opt.breakindent = true
 --INDENTING--
 
 --LINE NUMBERS--
 opt.number = true
 opt.relativenumber = true
+opt.signcolumn = "yes"
 --LINE NUMBERS--
+
+--PREVIEW--
+opt.inccommand = "split"
+opt.confirm = true
+--PREVIEW--
 
 --SCROLLING--
 opt.scrolloff = 8
