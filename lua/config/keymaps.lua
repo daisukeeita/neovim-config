@@ -1,5 +1,18 @@
-local map = function (mode, lhs, rhs, desc)
-  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc or nil })
+--local builtin = require("telescope.builtin")
+local map = function(mode, lhs, rhs, desc)
+	vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc or nil })
+end
+
+local telescope_map = function(mode, lhs, rhs, desc)
+	map(mode, lhs, function()
+		require("telescope.builtin")[rhs]()
+	end, desc)
+end
+
+local lsp_map = function(mode, lhs, rhs, buf, desc)
+	vim.keymap.set(mode, lhs, function()
+		require("telescope.builtin")[rhs]()
+	end, { buffer = buf, desc = desc })
 end
 
 vim.g.mapleader = " "
@@ -12,7 +25,12 @@ map("n", "<Esc>", ":nohlsearch<CR>", "Clear highlight search")
 -----------------------------------------------------------------
 ---                          YANKING                          ---
 -----------------------------------------------------------------
-map( {"n", "v"}, "<leader>y", '"+y', "Copy to clipboard")
+map({ "n", "v" }, "<leader>y", '"+y', "Copy to clipboard")
+
+-----------------------------------------------------------------
+---                           GIT                             ---
+-----------------------------------------------------------------
+map("n", "<leader>gg", ":LazyGit<CR>", "Open LazyGit")
 
 -----------------------------------------------------------------
 ---                        NAVIGATION                         ---
@@ -61,4 +79,38 @@ map("n", "<leader>bd", ":bp|bd #<CR>", "Delete a buffer")
 -----------------------------------------------------------------
 ---                      DIAGNOSTICS                          ---
 -----------------------------------------------------------------
-map("n", "<leader>do", ":lua vim.diagnostic.open_float()<CR>", "Open Diagnostic Description")
+map("n", "<leader>dd", ":lua vim.diagnostic.open_float()<CR>", "Open [D]iagnostic [D]escription")
+map("n", "<leader>dq", ":lua vim.diagnostic.setloclist()<CR>", "Open [D]iagnostics [Q]uickfix List")
+
+-----------------------------------------------------------------
+---                        SEARCH                             ---
+-----------------------------------------------------------------
+telescope_map("n", "<leader>sh", "help_tags", "[S]earch [H]elp")
+telescope_map("n", "<leader>sk", "keymaps", "[S]earch [K]eymaps")
+telescope_map("n", "<leader>sf", "find_files", "[S]earch [F]iles")
+telescope_map("n", "<leader>ss", "builtin", "[S]earch [S]elect Telescope")
+telescope_map({ "n", "v" }, "<leader>sw", "grep_string", "[S]earch Current [W]ord")
+telescope_map("n", "<leader>sg", "live_grep", "[S]earch by [G]rep")
+telescope_map("n", "<leader>sd", "diagnostics", "[S]earch [D]iagnostics")
+telescope_map("n", "<leader>sr", "resume", "[S]earch [R]esume")
+telescope_map("n", "<leader>s.", "oldfiles", "[S]earch Recent Files ('.' for repeat)")
+telescope_map("n", "<leader>sc", "commands", "[S]earch Commands")
+telescope_map("n", "<leader><leader>", "buffers", "[ ] Find Existing Buffers")
+
+-----------------------------------------------------------------
+---                        NAVIGATE LSP                       ---
+-----------------------------------------------------------------
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("Telescope-LSP-Attach", { clear = true }),
+	callback = function(event)
+		local buf = event.buf
+		lsp_map("n", "grr", "lsp_references", buf, "[G]o to [R]eferences")
+		lsp_map("n", "gri", "lsp_implementations", buf, "[G]o to [I]mplementations")
+		lsp_map("n", "grd", "lsp_definitions", buf, "[G]o to [D]efinitions")
+		lsp_map("n", "gO", "lsp_document_symbols", buf, "[G]o to Document Symbols")
+		lsp_map("n", "gW", "lsp_dynamic_workspace_symbols", buf, "[G]o to [W]orkspace Symbols")
+		lsp_map("n", "grt", "lsp_type_definitions", buf, "[G]o to [T]ype Definitions")
+		map({ "n", "x" }, "gra", ":lua vim.lsp.buf.code_action()<CR>", "[G]o to Code [A]ction")
+		map("n", "grn", ":lua vim.lsp.buf.rename()<CR>", "[R]ename")
+	end,
+})
