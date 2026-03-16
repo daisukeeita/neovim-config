@@ -2,23 +2,20 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 local navic = require("nvim-navic")
 
 vim.lsp.config("lua_ls", {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-  end,
-  settings = {
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		navic.attach(client, bufnr)
+	end,
+	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" },
 			diagnostics = { globals = { "vim" } },
-      telemetry = { enable = false },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.fn.stdpath("config")
-        }
-      },
+			telemetry = { enable = false },
+			workspace = {
+				checkThirdParty = false,
+			},
 			completion = {
-				callSnippet = "Both",
+				callSnippet = "Replace",
 				keywordSnippet = "Both",
 				workspaceWord = true,
 			},
@@ -33,6 +30,4 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
-
-
-vim.lsp.enable('lua_ls')
+vim.lsp.enable("lua_ls")
