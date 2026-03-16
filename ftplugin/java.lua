@@ -1,4 +1,5 @@
 local jdtls = require("jdtls")
+local navic = require("nvim-navic")
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 local home = os.getenv("HOME")
@@ -13,10 +14,10 @@ local os_config = jdtls_path .. "/config_linux"
 local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 
 local bundles = {
-	vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1),
+	vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", true),
 }
 
-local java_test_bundles = vim.split(vim.fn.glob(vscode_java_test_path .. "/server/*.jar", 1), "\n")
+local java_test_bundles = vim.split(vim.fn.glob(vscode_java_test_path .. "/server/*.jar", true), "\n")
 local excluded = {
 	"com.microsoft.java.test.runner-jar-with-dependencies.jar",
 	"jacocoagent.jar",
@@ -32,14 +33,10 @@ local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local on_attach = function(client, bufnr)
-	-- 1. Setup Java Debugger (DAP)
-	-- This specifically connects the java-debug bundles you already have
-	require("jdtls").setup_dap({ hotcodereplace = "auto" })
+	require("jdtls").setup_dap({ hotcodereplace = "auto", config_overrides = {} })
 
-	-- 2. Setup Java Test (Optional helper for nvim-jdtls)
 	require("jdtls.dap").setup_dap_main_class_configs()
 
-	-- 3. The "Ghost Text" (CodeLens) Refresh we discussed
 	if client.supports_method("textDocument/codeLens") then
 		vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
 			buffer = bufnr,
@@ -50,7 +47,10 @@ local on_attach = function(client, bufnr)
 		vim.lsp.codelens.refresh()
 	end
 
-	-- 4. Keymaps (Helper function to keep things clean)
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
+
 	local function opts(desc)
 		return { noremap = true, silent = true, buffer = bufnr, desc = desc }
 	end
