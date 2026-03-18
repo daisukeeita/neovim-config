@@ -20,7 +20,7 @@ return {
 
 			lualine.setup({
 				options = {
-					theme = "catppuccin-nvim",
+					theme = "everforest",
 					section_separators = { left = "", right = "" },
 					component_separators = { left = "", right = "" },
 				},
