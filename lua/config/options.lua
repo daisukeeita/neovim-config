@@ -35,6 +35,11 @@ opt.relativenumber = true
 opt.signcolumn = "yes"
 --LINE NUMBERS--
 
+--NETRW--
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+--NETRW
+
 --PREVIEW--
 opt.inccommand = "split"
 opt.confirm = true
