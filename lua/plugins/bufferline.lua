@@ -5,7 +5,13 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("bufferline").setup({
-				highlights = require("catppuccin.special.bufferline").get_theme(),
+				highlights = {
+					background = { attribute = "bg", higlight = "TabLine" },
+					buffer_selected = {
+						bold = true,
+						italic = false,
+					},
+				},
 			})
 		end,
 	},
