@@ -67,7 +67,7 @@ map("n", "<C-down>", "<cmd>resize -4<CR>", "Decreasing the height of the pane")
 -----------------------------------------------------------------
 ---                    FILE EXPLORATION                       ---
 -----------------------------------------------------------------
-map("n", "<leader>e", ":Neotree toggle<cr>", "Toggle Neo-Tree")
+map("n", "<leader>e", ":NvimTreeToggle<cr>", "Toggle File Explorer")
 
 -----------------------------------------------------------------
 ---                   BUFFER NAVIGATION                       ---
