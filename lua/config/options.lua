@@ -92,3 +92,4 @@ vim.diagnostic.config({
 --DIAGNOSTIC CONFIGURATION--
 
 opt.mouse = ""
+opt.fillchars = { eob = " " }
