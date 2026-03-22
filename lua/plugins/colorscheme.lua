@@ -23,7 +23,7 @@ return {
 			vim.g.everforest_better_performance = 1
 			vim.g.everforest_enable_italic = 1
 			vim.g.everforest_show_eob = 0
-			vim.g.everforest_diagnostic_text_highlight = 1
+			vim.g.everforest_diagnostic_text_highlight = 0
 			vim.g.everforest_diagnostic_line_highlight = 1
 
 			vim.cmd.colorscheme("everforest")
