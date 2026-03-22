@@ -5,6 +5,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				java = { "google-java-format" },
+				xml = { "xmlformatter" },
 			},
 			format_on_save = {
 				timout_ms = 500,
