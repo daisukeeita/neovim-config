@@ -66,6 +66,13 @@ opt.showmode = false
 opt.cmdheight = 1
 --STATUS LINE--
 
+--WRAPPING--
+opt.textwidth = 80
+opt.wrap = true
+opt.linebreak = true
+opt.colorcolumn = "80"
+--WRAPPING--
+
 --DIAGNOSTIC CONFIGURATION--
 vim.diagnostic.config({
 	underline = true,
