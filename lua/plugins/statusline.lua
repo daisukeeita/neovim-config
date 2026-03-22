@@ -25,7 +25,7 @@ return {
 					component_separators = { left = "", right = "" },
 				},
 				sections = {
-					lualine_a = { { "mode", icon = "" } },
+					lualine_a = { { "datetime", style = "  %H:%M:%S" } },
 					lualine_b = { "branch", "diff", "diagnostics" },
 					lualine_c = {
 						{ lsp_attached },
@@ -40,7 +40,7 @@ return {
 					},
 					lualine_x = { "encoding", "fileformat", "filetype" },
 					lualine_y = { "progress" },
-					lualine_z = { { "location", icon = "" } },
+					lualine_z = { { "location", icon = "" }, { "datetime", style = "󰃭 %a %b %d" } },
 				},
 				inactive_sessions = {
 					lualine_c = { "filename" },
