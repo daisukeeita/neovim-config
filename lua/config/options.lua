@@ -1,0 +1,115 @@
+local opt = vim.opt
+
+--CLIPBOARD--
+vim.g.clipboard = "osc52"
+--CLIPBOARD--
+
+--COMPLETION--
+opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+--COMPLETION--
+
+--CURSOR LINE--
+opt.cursorline = true
+opt.updatetime = 250
+--CURSOR LINE--
+
+--GUI COLORS--
+opt.termguicolors = true
+vim.g.have_nerd_font = true
+--GUI COLORS--
+
+--INDENTING--
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth = 2
+opt.autoindent = true
+opt.expandtab = true
+opt.smartindent = true
+opt.breakindent = true
+vim.bo.indentexpr = "v:lua.vim.treesitter.indentexpr()"
+--INDENTING--
+
+--LINE NUMBERS--
+opt.number = true
+opt.relativenumber = true
+opt.signcolumn = "yes"
+--LINE NUMBERS--
+
+--NETRW--
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+--NETRW
+
+--PREVIEW--
+opt.inccommand = "split"
+opt.confirm = true
+--PREVIEW--
+
+--SCROLLING--
+opt.scrolloff = 8
+opt.smoothscroll = true
+--SCROLLING--
+
+--SEARCH--
+opt.ignorecase = true
+opt.smartcase = true
+--SEARCH--
+
+--SPLITTING--
+opt.splitright = true
+opt.splitbelow = true
+--SPLITTING--
+
+--STATUS LINE--
+opt.laststatus = 3
+opt.showmode = false
+opt.cmdheight = 1
+--STATUS LINE--
+
+--WRAPPING--
+-- opt.textwidth = 80
+opt.wrap = true
+opt.linebreak = true
+-- opt.colorcolumn = "80"
+--WRAPPING--
+
+--DIAGNOSTIC CONFIGURATION--
+vim.diagnostic.config({
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	virtual_text = false,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+		},
+	},
+	float = {
+		scope = "cursor",
+		border = "rounded",
+		focusable = true,
+		style = "minimal",
+		source = "if_many",
+		prefix = " ",
+	},
+})
+--DIAGNOSTIC CONFIGURATION--
+
+--FOLDING--
+vim.o.foldcolumn = "1"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.fillchars:append({
+	foldopen = "", -- Icon when a fold is open
+	foldclose = "", -- Icon when a fold is closed
+	foldsep = " ", -- Separator character for nested folds (space hides clutter)
+})
+vim.opt.fillchars:append({ foldinner = "│" })
+--FOLDING--
+
+opt.mouse = ""
+opt.fillchars = { eob = " " }
