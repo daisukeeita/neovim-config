@@ -111,5 +111,15 @@ vim.opt.fillchars:append({
 vim.opt.fillchars:append({ foldinner = "│" })
 --FOLDING--
 
+--CHECKHEALTH--
+vim.g.health = {
+	style = "float",
+}
+--CHECKHEALTH--
+
+--BORDER--
+vim.o.winborder = "rounded"
+--BORDER--
+
 opt.mouse = ""
 opt.fillchars = { eob = " " }
