@@ -14,6 +14,22 @@ end
 vim.lsp.config("vtsls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
+
+	settings = {
+		typescript = {
+			inlayHints = { parameterNames = { enabled = "literals" } },
+			preferences = {
+				importModuleSpecifierPreference = "non-relative",
+				importModuleSpecifierEnding = "minimal",
+			},
+		},
+		javascript = {
+			inlayHints = { parameterNames = { enabled = "literals" } },
+			preferences = {
+				importModuleSpecifierPreference = "non-relative",
+			},
+		},
+	},
 })
 
 vim.lsp.enable("vtsls")
