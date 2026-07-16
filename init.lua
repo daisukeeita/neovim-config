@@ -15,6 +15,8 @@ require("mini.surround").setup()
 require("mini.splitjoin").setup()
 require("mini.indentscope").setup()
 
+require("nvim-ts-autotag").setup()
+
 require("mini.files").setup()
 require("mason").setup()
 

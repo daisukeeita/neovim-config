@@ -43,6 +43,10 @@ vim.lsp.config("vtsls", {
 	},
 })
 
+vim.treesitter.language.register("tsx", "typescriptreact")
+
 vim.lsp.enable("vtsls")
 
 vim.lsp.enable("tailwindcss")
+
+require("nvim-ts-autotag").setup()

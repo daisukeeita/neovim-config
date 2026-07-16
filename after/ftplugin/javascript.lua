@@ -34,3 +34,4 @@ vim.lsp.config("vtsls", {
 
 vim.lsp.enable("vtsls")
 vim.lsp.enable("tailwindcss")
+require("nvim-ts-autotag").setup()

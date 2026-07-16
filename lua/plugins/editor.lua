@@ -7,4 +7,6 @@ return {
 
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/mfussenegger/nvim-lint" },
+
+	{ src = "https://github.com/windwp/nvim-ts-autotag" },
 }
